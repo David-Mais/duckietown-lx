@@ -4,8 +4,7 @@ import numpy as np
 import yaml
 import os
 
-def PIDController(
-    v_0: float, y_ref: float, y_hat: float, prev_e_y: float, prev_int_y: float, delta_t: float
+def PIDController(v_0: float, y_ref: float, y_hat: float, prev_e_y: float, prev_int_y: float, delta_t: float
 ) -> Tuple[float, float, float, float]:
     """
     PID performing lateral control.
@@ -36,13 +35,33 @@ def PIDController(
     kp = gains['kp']
     kd = gains['kd']
     ki = gains['ki']
-
+    
+    # Overwritten to keep track of submissions
+    kp, kd, ki = 3.0, 10.0, 0.0
+    
     # ------------- DEFINE YOUR PID FUNCTION BELOW ---------
 
-    # These are random values, replace with your implementation of a PID controller in here
-    omega = np.random.uniform(-8.0, 8.0)
-    e = np.random.random()
-    e_int = np.random.random()
-    # ---
-    
+    # Tracking error
+    e = y_ref - y_hat
+
+    # integral of the error
+    e_int = prev_int_y + e * delta_t
+
+    # anti-windup - preventing the integral error from growing too much
+    e_int = max(min(e_int,2),-2)
+
+    # derivative of the error
+    e_der = (e - prev_e_y) / delta_t
+
+    omega = kp * e + kd * e_der + ki * e_int 
+
+    #omega = max(min(omega,0.5),-0.5)
+    #if abs(omega) > 0.5:
+    #    v_0 /= 10
+    #    omega /= 10
+    #else:
+    #    v_0 = 0.22
+
+    #print(f"y_ref={y_ref} y_hat={y_hat:.4f} e={e:.4f} e_der={e_der:.4f} e_int={e_int:.4f} ki={ki:.4f} Omega={omega:.5f} v0={v_0}")
+
     return v_0, omega, e, e_int
