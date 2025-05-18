@@ -1,0 +1,11 @@
+plan:
+- duration: 1.3995737498605552
+  velocity_x_m_s: 0.0
+  angular_velocity_deg_s: -30.0
+- duration: 1.6817030058842135
+  velocity_x_m_s: 0.4
+  angular_velocity_deg_s: 0.0
+- duration: 2.8995737498605556
+  velocity_x_m_s: 0.0
+  angular_velocity_deg_s: 30.0
+feasible: true

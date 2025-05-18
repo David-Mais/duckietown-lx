@@ -1,0 +1,11 @@
+plan:
+- duration: 0.0
+  velocity_x_m_s: 0.0
+  angular_velocity_deg_s: -30.0
+- duration: 1.25
+  velocity_x_m_s: 0.4
+  angular_velocity_deg_s: 0.0
+- duration: 0.0
+  velocity_x_m_s: 0.0
+  angular_velocity_deg_s: -30.0
+feasible: true
